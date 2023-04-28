@@ -1,31 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
+
+
 <head>
   <title>Random Quote Machine</title>
   <meta charset="utf-8">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/style.css" rel="stylesheet">
-  <script src="js/randomQuoteMachine.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
 </head>
 
 <body>
-  <div class="container">
-    <div class="bg">
-      <div id="quote-box">
-        <div id="text"></div>
-        <div id="author"></div>
-        <div id="buttons" class="text-center">
-          <a id="new-quote" class="btn btn-lg btn-success">New Quote</a>
-          <a id="tweet-quote" class="btn btn-lg btn-primary" href="#" target="_blank" >Tweet Quote</a>
-        </div>
+  <div id="wrapper">
+    <div id="quote-box">
+      <div class="quote-text">
+        <i class="fa fa-quote-left"> </i><span id="text"></span>
+      </div>
+      <div class="quote-author">- <span id="author"></span></div>
+      <div class="buttons">
+        <a class="button" id="tweet-quote" title="Tweet this quote!" target="_top">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="button" id="tumblr-quote" title="Post this quote on tumblr!" target="_blank">
+          <i class="fa fa-tumblr"></i>
+        </a>
+        <button class="button" id="new-quote">New quote</button>
       </div>
     </div>
+    <div class="footer">by <a href="">Roy Cuadra</a></div>
   </div>
 
-  <!-- Scripts -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
-    <!-- FREE CODE CAMP TESTING SCRIPT -->
-  <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
+  <script>
+const projectName = 'random-quote-machine';
+let quotesData;
+var colors = [
+  '#16a085',
+  '#27ae60',
+  '#2c3e50',
+  '#f39c12',
+  '#e74c3c',
+  '#9b59b6',
+  '#FB6964',
+  '#342224',
+  '#472E32',
+  '#BDBB99',
+  '#77B1A9',
+  '#73A857'
+];
+var currentQuote = '',
+  currentAuthor = '';
+
+function getQuotes() {
+  return $.ajax({
+    headers: {
+      Accept: 'application/json'
+    },
+    url:
+      'https://gist.githubusercontent.com/camperbot/5a022b72e96c4c9585c32bf6a75f62d9/raw/e3c6895ce42069f0ee7e991229064f167fe8ccdc/quotes.json',
+    success: function (jsonQuotes) {
+      if (typeof jsonQuotes === 'string') {
+        quotesData = JSON.parse(jsonQuotes);
+        console.log('quotesData');
+        console.log(quotesData);
+      }
+    }
+  });
+}
+
+function getRandomQuote() {
+  return quotesData.quotes[
+    Math.floor(Math.random() * quotesData.quotes.length)
+  ];
+}
+
+function getQuote() {
+  let randomQuote = getRandomQuote();
+
+  currentQuote = randomQuote.quote;
+  currentAuthor = randomQuote.author;
+
+  $('#tweet-quote').attr(
+    'href',
+    'https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text=' +
+      encodeURIComponent('"' + currentQuote + '" ' + currentAuthor)
+  );
+
+  $('#tumblr-quote').attr(
+    'href',
+    'https://www.tumblr.com/widgets/share/tool?posttype=quote&tags=quotes,freecodecamp&caption=' +
+      encodeURIComponent(currentAuthor) +
+      '&content=' +
+      encodeURIComponent(currentQuote) +
+      '&canonicalUrl=https%3A%2F%2Fwww.tumblr.com%2Fbuttons&shareSource=tumblr_share_button'
+  );
+
+  $('.quote-text').animate({ opacity: 0 }, 500, function () {
+    $(this).animate({ opacity: 1 }, 500);
+    $('#text').text(randomQuote.quote);
+  });
+
+  $('.quote-author').animate({ opacity: 0 }, 500, function () {
+    $(this).animate({ opacity: 1 }, 500);
+    $('#author').html(randomQuote.author);
+  });
+
+  var color = Math.floor(Math.random() * colors.length);
+  $('html body').animate(
+    {
+      backgroundColor: colors[color],
+      color: colors[color]
+    },
+    1000
+  );
+  $('.button').animate(
+    {
+      backgroundColor: colors[color]
+    },
+    1000
+  );
+}
+
+$(document).ready(function () {
+  getQuotes().then(() => {
+    getQuote();
+  });
+
+  $('#new-quote').on('click', getQuote);
+});
+
+  </script>
 </body>
+
 </html>
