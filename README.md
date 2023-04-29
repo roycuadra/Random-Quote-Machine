@@ -1,38 +1,35 @@
-This is the solution to Freecodecamp>>>
-Front End Libraries Projects - Build a Random Quote Machine
-Live Site:  https://freecodecamp-solutions.github.io/Build-a-Random-Quote-Machine/
+# Random Quote Machine
 
+This is a simple web application that displays random quotes each time the user clicks a button.
 
-Objective: Build a CodePen.io app that is functionally similar to this: https://codepen.io/freeCodeCamp/full/qRZeGZ.
-Fulfill the below user stories and get all of the tests to pass. Give it your own personal style.
+## Technologies Used
 
-You can use any mix of HTML, JavaScript, CSS, Bootstrap, SASS, React, Redux, and jQuery to complete this project. You should use a frontend framework (like React for example) because this section is about learning frontend frameworks. Additional technologies not listed above are not recommended and using them is at your own risk. We are looking at supporting other frontend frameworks like Angular and Vue, but they are not currently supported. We will accept and try to fix all issue reports that use the suggested technology stack for this project. Happy coding!
+- HTML
+- CSS
+- JavaScript
 
-User Story #1: I can see a wrapper element with a corresponding id="quote-box".
+## How to Use
 
-User Story #2: Within #quote-box, I can see an element with a corresponding id="text".
+1. Clone this repository to your local machine.
+2. Open the index.html file in your web browser.
+3. Click the "New Quote" button to display a new quote.
 
-User Story #3: Within #quote-box, I can see an element with a corresponding id="author".
+## Design
 
-User Story #4: Within #quote-box, I can see a clickable element with a corresponding id="new-quote".
+The design of this application is minimalist and straightforward. The main focus is on the quote displayed in the center of the page, with a simple background color and font to provide contrast.
 
-User Story #5: Within #quote-box, I can see a clickable a element with a corresponding id="tweet-quote".
+## Code Overview
 
-User Story #6: On first load, my quote machine displays a random quote in the element with id="text".
+The main functionality of the Random Quote Machine is implemented in JavaScript. The quotes are stored in an array, and a random quote is selected each time the "New Quote" button is clicked. The quote is then displayed on the page using JavaScript DOM manipulation.
 
-User Story #7: On first load, my quote machine displays the random quote's author in the element with id="author".
+The CSS is used to style the layout and appearance of the page, while the HTML provides the structure.
 
-User Story #8: When the #new-quote button is clicked, my quote machine should fetch a new quote and display it in the #text element.
+## Credits
 
-User Story #9: My quote machine should fetch the new quote's author when the #new-quote button is clicked and display it in the #author element.
+This project was inspired by the [FreeCodeCamp Random Quote Machine challenge](https://www.freecodecamp.org/learn/front-end-libraries/front-end-libraries-projects/build-a-random-quote-machine).
 
-User Story #10: I can tweet the current quote by clicking on the #tweet-quotea element. This a element should include the "twitter.com/intent/tweet" path in its href attribute to tweet the current quote.
+The quotes used in this application were obtained from the [Quotable API](https://github.com/lukePeavey/quotable).
 
-User Story #11: The #quote-box wrapper element should be horizontally centered. Please run tests with browser's zoom level at 100% and page maximized.
+## License
 
-You can build your project by forking this CodePen pen. Or you can use this CDN link to run the tests in any environment you like: https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js
-
-Once you're done, submit the URL to your working project with all its tests passing.
-
-Note: Twitter does not allow links to be loaded in an iframe. Try using the target="_blank" or target="_top" attribute on the #tweet-quote element if your tweet won't load. target="_top" will replace the current tab so make sure your work is saved.
-Freecodecamp: https://www.freecodecamp.org/learn/front-end-libraries/front-end-libraries-projects/build-a-random-quote-machine
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
